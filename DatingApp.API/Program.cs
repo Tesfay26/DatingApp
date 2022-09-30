@@ -1,5 +1,8 @@
 using DatingApp.API.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +14,25 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 
+//Authentication here
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
+            .GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+        };
+    });
 
+//Add All here IRepository and Repository
+builder.Services.AddScoped<IAuthRepository, AuthRepository>(); 
+
+
+//connectionString
 builder.Services.AddDbContext<DataContext>(item => item.UseSqlServer(
             builder.Configuration.GetConnectionString("DefaultConnection"),
             b => b.MigrationsAssembly("DatingApp.API")));
@@ -35,5 +56,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseCors(cors => cors.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-
+app.UseAuthentication();
 app.Run();

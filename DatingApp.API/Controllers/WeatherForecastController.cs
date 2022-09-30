@@ -1,9 +1,10 @@
 using DatingApp.API.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.API.Controllers;
-
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
@@ -14,16 +15,18 @@ public class WeatherForecastController : ControllerBase
         this._dataContext = context;
     }
 
-
+    [AllowAnonymous]
     [HttpGet("value",Name = "GetWeatherForecast")]   
     public async Task<IActionResult> GetValue()
     {
         var value = await _dataContext.values.ToListAsync();
         return Ok(value);   
     }
+
+    [AllowAnonymous]
     [HttpGet("value/{id}", Name = "GetSpecficValue")]
     public async Task<IActionResult> GetValue(int id) {
-        var value = _dataContext.values.FirstOrDefaultAsync(x => x.Id == id);  
+        var value = await _dataContext.values.FirstOrDefaultAsync(x => x.Id == id);  
         return Ok(value);
     }
 }

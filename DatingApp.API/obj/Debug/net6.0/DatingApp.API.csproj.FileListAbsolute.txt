@@ -80,3 +80,4 @@ F:\projects\DatingApp\DatingApp.API\obj\Debug\net6.0\refint\DatingApp.API.dll
 F:\projects\DatingApp\DatingApp.API\obj\Debug\net6.0\DatingApp.API.pdb
 F:\projects\DatingApp\DatingApp.API\obj\Debug\net6.0\DatingApp.API.genruntimeconfig.cache
 F:\projects\DatingApp\DatingApp.API\obj\Debug\net6.0\ref\DatingApp.API.dll
+F:\projects\DatingApp\DatingApp.API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
