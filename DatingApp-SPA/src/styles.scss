@@ -1,3 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import'../node_modules/bootstrap/dist/css/bootstrap.min.css';
+/* add bootswatch here */
+@import '../node_modules/bootswatch/dist/united/bootstrap.min.css';
 @import '../node_modules/font-awesome/css/font-awesome.min.css';
+
+//add alertify here and in angular.json in script[]
+@import '../node_modules/alertifyjs/build/css/alertify.min.css';
+@import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
+
+
+
+/* Importing Datepicker SCSS file. */
+//@import "~ngx-bootstrap/datepicker/bs-datepicker";
