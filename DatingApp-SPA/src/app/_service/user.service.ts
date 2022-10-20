@@ -14,7 +14,7 @@ import { User } from '../_models/user';
 
 export class UserService {
 
-  baseUrl = environment.apiUrl+'Users';
+baseUrl = environment.apiUrl+'Users';
 constructor(private http: HttpClient) { }
 
 getUser(id:number):Observable<User>{
@@ -23,6 +23,10 @@ getUser(id:number):Observable<User>{
 
 getUsers():Observable<User[]>{
   return this.http.get<User[]>(this.baseUrl);
+}
+
+updateUser(id:number, userData:User){
+  return this.http.put(this.baseUrl+"/"+id, userData);
 }
 
 }
