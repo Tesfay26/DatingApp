@@ -28,8 +28,9 @@ import { catchError } from "rxjs/operators";
                 }
               }
             }
-            return throwError(modelStateErrors || serverError || "Server Error");
+            throwError(modelStateErrors || serverError || "Server Error");
           }
+           return throwError("");
         })
       );
   }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace DatingApp.API.Controllers;
 [Authorize]
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class WeatherForecastController : ControllerBase
 {
     private readonly DataContext _dataContext;
@@ -19,14 +19,14 @@ public class WeatherForecastController : ControllerBase
     [HttpGet("value",Name = "GetWeatherForecast")]   
     public async Task<IActionResult> GetValue()
     {
-        var value = await _dataContext.values.ToListAsync();
+        var value = await _dataContext.Values.ToListAsync();
         return Ok(value);   
     }
 
     [AllowAnonymous]
     [HttpGet("value/{id}", Name = "GetSpecficValue")]
     public async Task<IActionResult> GetValue(int id) {
-        var value = await _dataContext.values.FirstOrDefaultAsync(x => x.Id == id);  
+        var value = await _dataContext.Values.FirstOrDefaultAsync(x => x.Id == id);  
         return Ok(value);
     }
 }

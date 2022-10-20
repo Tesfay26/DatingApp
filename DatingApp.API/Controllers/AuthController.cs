@@ -1,6 +1,7 @@
 using DatingApp.API.Data;
 using DatingApp.API.Dtos;
 using DatingApp.API.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -13,8 +14,9 @@ using System.Threading.Tasks;
 
 namespace DatingApp.API.Controllers
 {
+    //[Authorize] 
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AuthController :ControllerBase
     {
         private readonly IAuthRepository rep;
@@ -29,7 +31,7 @@ namespace DatingApp.API.Controllers
         {
             userForRegistrationDto.UserName = userForRegistrationDto.UserName.ToLower();
             if (await rep.UserExist(userForRegistrationDto.UserName))
-                return BadRequest("User Name already exixted");
+                return BadRequest("User Name already excited");
           
 
             var userToCreate = new User
